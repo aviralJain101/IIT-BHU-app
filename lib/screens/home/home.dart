@@ -101,25 +101,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.menu),
-                      onPressed: () => Scaffold.of(context).openDrawer(),
-                    ),
-                    Stack(
+                     Stack(
                       children: <Widget>[
                         Container(height: 60.0, width: 60.0),
                         Container(
                           height: 50.0,
                           width: 50.0,
                           child: GestureDetector(
-                            onTap: () { return HomeWidgets.getLogOutDialog(
-                                context,
-                                googleSignIn.currentUser == null
-                                    ? [
-                                        AssetImage('assets/profile_test.jpg'),
-                                        ''
-                                      ]
-                                    : [NetworkImage(photoUrl), displayName]);}
+                            onTap: () => Scaffold.of(context).openDrawer() 
+                            //{
+                              // return HomeWidgets.getLogOutDialog(
+                                // context,
+                                // googleSignIn.currentUser == null
+                                //     ? [
+                                //         AssetImage('assets/profile_test.jpg'),
+                                //         ''
+                                //       ]
+                                //     : [NetworkImage(photoUrl), displayName]);
+                                //}
                           ),
                           decoration: BoxDecoration(
                               image: DecorationImage(
@@ -145,7 +144,28 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         )
                       ],
-                    )
+                    ),
+                
+                    Padding(padding: EdgeInsets.only(left:5.0),),
+                    Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          //labelText: 'Search',
+                          hintText: 'Search',
+                            prefixIcon: Icon(Icons.search),
+                            border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(25.0)))
+                        ),
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.only(right:5.0),),
+                   SizedBox(
+                      child: IconButton(
+                       icon: Icon(Icons.notifications_active),
+                       onPressed: (){},
+                       
+                  ),
+                   )
                   ],
                 ),
               ),
@@ -171,13 +191,14 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 15.0),
                 child: Container(
-                  height: 300.0,
+                  height: 450.0,
+                  //width: 400.0,
                   child: (workshops != null)
                       ? StreamBuilder(
                           stream: workshops,
                           builder: (context, snapshot) {
                             return ListView.builder(
-                              scrollDirection: Axis.horizontal,
+                              scrollDirection: Axis.vertical,
                               itemCount: snapshot.data.documents.length,
                               itemBuilder: (context, i) {
                                 return HomeWidgets.getWorkshopCard(context,

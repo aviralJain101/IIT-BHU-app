@@ -10,6 +10,7 @@ import 'package:iit_app/screens/create.dart';
 import 'package:iit_app/services/crud.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: CrudMethods.isLoggedIn()
